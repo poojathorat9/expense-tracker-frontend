@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Expense } from '../types/Expense';
-import { initialExpenses } from '../data/expenses';
+import { fetchExpenses, createExpense as createExpenseService, deleteExpense as deleteExpenseService } from '../services/expenseService';
 
 interface ExpenseContextValue {
   expenses: Expense[];
@@ -12,20 +12,24 @@ interface ExpenseContextValue {
 const ExpenseContext = createContext<ExpenseContextValue | undefined>(undefined);
 
 export function ExpenseProvider({ children }: { children: ReactNode }) {
-  const [expenses, setExpenses] = useState<Expense[]>(initialExpenses);
+  const [expenses, setExpenses] = useState<Expense[]>([]);
+
+  useEffect(() => {
+    fetchExpenses().then(setExpenses);
+  }, []);
 
   function addExpense(expense: Omit<Expense, 'id'>) {
-    setExpenses((prev) => [
-      ...prev,
-      {
-        ...expense,
-        id: Date.now(),
-      },
-    ]);
+    createExpenseService(expense).then((newExpense) => {
+      setExpenses((prev) => [...prev, newExpense]);
+    });
   }
 
   function deleteExpense(id: number) {
-    setExpenses((prev) => prev.filter((item) => item.id !== id));
+    deleteExpenseService(id).then((deleted) => {
+      if (deleted) {
+        setExpenses((prev) => prev.filter((item) => item.id !== id));
+      }
+    });
   }
 
   return (

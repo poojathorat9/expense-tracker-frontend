@@ -1,7 +1,13 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Goal } from '../types/Goal';
-import { initialGoals } from '../data/goals';
+import {
+  fetchGoals,
+  createGoal as createGoalService,
+  updateGoal as updateGoalService,
+  deleteGoal as deleteGoalService,
+  contributeToGoal as contributeToGoalService,
+} from '../services/goalService';
 
 interface GoalContextValue {
   goals: Goal[];
@@ -14,51 +20,38 @@ interface GoalContextValue {
 const GoalContext = createContext<GoalContextValue | undefined>(undefined);
 
 export function GoalProvider({ children }: { children: ReactNode }) {
-  const [goals, setGoals] = useState<Goal[]>(initialGoals);
+  const [goals, setGoals] = useState<Goal[]>([]);
+
+  useEffect(() => {
+    fetchGoals().then(setGoals);
+  }, []);
 
   function addGoal(goal: Omit<Goal, 'id' | 'current'> & { current?: number }) {
-    setGoals((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        title: goal.title,
-        current: goal.current ?? 0,
-        target: goal.target,
-        targetDate: goal.targetDate,
-      },
-    ]);
+    createGoalService(goal).then((newGoal) => {
+      setGoals((prev) => [...prev, newGoal]);
+    });
   }
 
   function updateGoal(goalId: number, values: Partial<Omit<Goal, 'id'>>) {
-    setGoals((prev) =>
-      prev.map((goal) =>
-        goal.id === goalId
-          ? {
-              ...goal,
-              ...values,
-              current: values.current !== undefined ? Math.max(0, values.current) : goal.current,
-              target: values.target !== undefined ? Math.max(1, values.target) : goal.target,
-            }
-          : goal
-      )
-    );
+    updateGoalService(goalId, values).then((updated) => {
+      if (!updated) return;
+      setGoals((prev) => prev.map((goal) => (goal.id === goalId ? updated : goal)));
+    });
   }
 
   function deleteGoal(goalId: number) {
-    setGoals((prev) => prev.filter((goal) => goal.id !== goalId));
+    deleteGoalService(goalId).then((deleted) => {
+      if (deleted) {
+        setGoals((prev) => prev.filter((goal) => goal.id !== goalId));
+      }
+    });
   }
 
   function contributeToGoal(goalId: number, amount: number) {
-    setGoals((prev) =>
-      prev.map((goal) =>
-        goal.id === goalId
-          ? {
-              ...goal,
-              current: Math.min(goal.target, goal.current + Math.max(0, amount)),
-            }
-          : goal
-      )
-    );
+    contributeToGoalService(goalId, amount).then((updated) => {
+      if (!updated) return;
+      setGoals((prev) => prev.map((goal) => (goal.id === goalId ? updated : goal)));
+    });
   }
 
   return (
