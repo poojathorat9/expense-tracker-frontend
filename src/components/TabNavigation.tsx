@@ -16,17 +16,21 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
 
   return (
     <div className="stat-cards-container">
-      {stats.map((stat) => (
-        <div key={stat.label} onClick={() => onTabChange(stat.label)}>
-          <StatCard
-            label={stat.label}
-            icon={stat.icon}
-            amount={stat.amount}
-            trend={stat.trend}
-            trendUp={stat.trendUp}
-          />
-        </div>
-      ))}
+      {stats.map((stat) => {
+        const isActive = stat.label === activeTab;
+        return (
+          <div key={stat.label} onClick={() => onTabChange(stat.label)}>
+            <StatCard
+              label={stat.label}
+              icon={stat.icon}
+              amount={stat.amount}
+              trend={stat.trend}
+              trendUp={stat.trendUp}
+              active={isActive}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

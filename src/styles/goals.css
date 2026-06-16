@@ -1,0 +1,307 @@
+.goals-page {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.goals-page-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.goals-summary-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.goals-create-button {
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: #14b8a6;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.goals-create-button:hover {
+  background: #0f766e;
+}
+
+.goals-create-label {
+  color: #64748b;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.goals-create-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.goals-create-input-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(180px, 240px) minmax(180px, 220px) auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.goals-create-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  color: #111827;
+  background: #f8fafc;
+}
+
+.goals-create-button {
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: #14b8a6;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.goals-create-button:hover {
+  background: #0f766e;
+}
+
+.goals-summary-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 18px;
+}
+
+.goal-item-list {
+  display: grid;
+  gap: 18px;
+}
+
+.goal-card {
+  padding: 20px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.goal-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.goal-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.goal-card-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.action-menu-container {
+  position: relative;
+}
+
+.action-menu-button {
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: #ffffff;
+  color: #0f172a;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.action-menu-button:hover {
+  background: #f8fafc;
+}
+
+.action-menu-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  z-index: 10;
+}
+
+.action-menu-item {
+  text-align: left;
+  width: 100%;
+  border: none;
+  background: #f8fafc;
+  color: #0f172a;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.action-menu-item:hover {
+  background: #e2e8f0;
+}
+
+.action-menu-item.delete {
+  background: #fff1f2;
+  color: #b91c1c;
+}
+
+.action-menu-item.delete:hover {
+  background: #fee2e2;
+}
+
+.goal-card-meta {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.progress-bar {
+  position: relative;
+  height: 22px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #14b8a6, #0f766e);
+  border-radius: 999px;
+}
+
+.progress-label {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #111827;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  padding: 24px;
+}
+
+.modal-card {
+  width: min(560px, 100%);
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+  border: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.modal-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.modal-label {
+  display: grid;
+  gap: 8px;
+  color: #374151;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.modal-button {
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.modal-button.primary {
+  background: #14b8a6;
+  color: #ffffff;
+  border-color: #14b8a6;
+}
+
+.modal-button.primary:hover {
+  background: #0f766e;
+}
+
+.modal-button.delete {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.modal-button.delete:hover {
+  background: #fecaca;
+}
+
+.modal-button:hover {
+  background: #f8fafc;
+}

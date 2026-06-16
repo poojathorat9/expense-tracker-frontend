@@ -4,11 +4,12 @@ interface StatCardProps {
   trend: string;
   icon: string;
   trendUp?: boolean;
+  active?: boolean;
 }
 
-export default function StatCard({ label, amount, trend, icon, trendUp = true }: StatCardProps) {
+export default function StatCard({ label, amount, trend, icon, trendUp = true, active = false }: StatCardProps) {
   return (
-    <div className="stat-card">
+    <div className={`stat-card ${active ? 'stat-card-active' : ''}`}>
       <div className="stat-card-header">
         <span className="stat-icon">{icon}</span>
         <span className={`stat-trend ${trendUp ? 'positive' : 'negative'}`}>

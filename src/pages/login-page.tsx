@@ -5,12 +5,11 @@ import '../styles/login-page.css';
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
+  const [showPassword] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password, keepLoggedIn });
+    console.log('Login attempt:', { email, password });
   };
 
   return (
