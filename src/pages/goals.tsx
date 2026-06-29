@@ -7,6 +7,7 @@ import '../styles/goals.css';
 
 export default function GoalsPage() {
   const [activeMenuItem, setActiveMenuItem] = useState('Goals');
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   function handleSidebarClick(item: string) {
@@ -14,13 +15,14 @@ export default function GoalsPage() {
     if (item === 'Dashboard') navigate('/dashboard');
     if (item === 'Expenses') navigate('/expense');
     if (item === 'Goals') navigate('/goals');
+    setMobileOpen(false);
   }
 
   return (
     <div className="dashboard-container">
-      <Sidebar activeItem={activeMenuItem} onItemClick={handleSidebarClick} />
+      <Sidebar activeItem={activeMenuItem} onItemClick={handleSidebarClick} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
       <div className="dashboard-main">
-        <DashboardHeader userName="Pooja" />
+        <DashboardHeader userName="Pooja" onMenuClick={() => setMobileOpen(true)} />
         <div className="dashboard-content">
           <Goals />
         </div>

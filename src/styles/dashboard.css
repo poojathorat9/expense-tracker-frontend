@@ -3,13 +3,29 @@
   min-height: 100vh;
   background-color: #f9fafb;
   color: #1f2937;
+  width: 100%;
 }
 
 .dashboard-sidebar {
   width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
   background-color: #ffffff;
   border-right: 1px solid #e5e7eb;
   padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-self: flex-start;
+  transition: transform 240ms ease;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.dashboard-sidebar.open {
+  transform: translateX(0);
 }
 
 .sidebar-header {
@@ -59,6 +75,7 @@
 
 .dashboard-main {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -71,6 +88,27 @@
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
+}
+
+.header-menu-button {
+  display: none;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 1rem;
+  padding: 0;
+}
+
+.header-menu-button img {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .dashboard-header h1 {
@@ -220,4 +258,117 @@
 .transaction-amount {
   color: #14b8a6;
   font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    border-right: 1px solid #e5e7eb;
+    padding: 1.5rem 0;
+    z-index: 60;
+    background-color: #ffffff;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+  }
+
+  .dashboard-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+    z-index: 50;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .sidebar-header {
+    padding: 1.5rem 1.5rem 1rem;
+    margin-bottom: 0;
+  }
+
+  .sidebar-nav {
+    display: block;
+  }
+
+  .sidebar-nav-item {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+  }
+
+  .sidebar-nav-item.active {
+    border-left-color: #14b8a6;
+    background-color: #f0fdf9;
+    color: #14b8a6;
+  }
+
+  .dashboard-header {
+    padding: 1.25rem;
+  }
+
+  .dashboard-content {
+    padding: 1.25rem;
+  }
+
+  .dashboard-charts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .header-menu-button {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-header {
+    padding: 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  .dashboard-tabs {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-tab {
+    flex: 1 1 calc(50% - 0.5rem);
+    text-align: center;
+  }
+
+  .chart-container,
+  .transactions-container {
+    padding: 1rem;
+  }
+
+  .transactions-header,
+  .transaction-row {
+    grid-template-columns: 1fr;
+  }
 }

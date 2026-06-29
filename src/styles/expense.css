@@ -1,5 +1,7 @@
 .expenses-page {
   padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .expenses-card {
@@ -10,6 +12,9 @@
   box-shadow: 0 1px 2px rgba(16,24,40,0.04);
   border: 1px solid #e5e7eb;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .expenses-header {
@@ -31,13 +36,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .search-input {
   flex: 1 1 auto;
-  min-width: 320px;
-  max-width: calc(100% - 140px);
+  min-width: min(320px, 100%);
+  max-width: 100%;
   padding: 12px 14px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -224,12 +229,52 @@
   background: #f8fafc;
 }
 
+@media (max-width: 900px) {
+  .expenses-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .expenses-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input,
+  .add-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .table-headers {
+    grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+  }
+
+  .table-row {
+    grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+  }
+}
+
 @media (max-width: 700px) {
-  .table-headers, .table-row {
+  .expenses-page {
+    padding: 1rem;
+  }
+
+  .table-headers {
+    display: none;
+  }
+
+  .table-row {
     grid-template-columns: 1fr;
     row-gap: 6px;
   }
-  .expenses-actions {
-    flex-direction: row;
+
+  .cell.amount {
+    text-align: left;
+    padding-right: 0;
+  }
+
+  .cell.actions {
+    justify-content: flex-start;
   }
 }

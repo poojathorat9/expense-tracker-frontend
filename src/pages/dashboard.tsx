@@ -11,6 +11,7 @@ import '../styles/dashboard.css';
 export default function Dashboard() {
   const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
   const [activeTab, setActiveTab] = useState('Income');
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   function handleSidebarClick(item: string) {
@@ -18,13 +19,14 @@ export default function Dashboard() {
     if (item === 'Expenses') navigate('/expense');
     if (item === 'Dashboard') navigate('/dashboard');
     if (item === 'Goals') navigate('/goals');
+    setMobileOpen(false);
   }
 
   return (
     <div className="dashboard-container">
-      <Sidebar activeItem={activeMenuItem} onItemClick={handleSidebarClick} />
+      <Sidebar activeItem={activeMenuItem} onItemClick={handleSidebarClick} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
       <div className="dashboard-main">
-        <DashboardHeader userName="Pooja" />
+        <DashboardHeader userName="Pooja" onMenuClick={() => setMobileOpen(true)} />
         <div className="dashboard-content">
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
           

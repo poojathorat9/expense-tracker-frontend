@@ -2,6 +2,8 @@
   display: grid;
   gap: 24px;
   padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .goals-page-header {
@@ -9,6 +11,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .goals-summary-card {
@@ -304,4 +307,53 @@
 
 .modal-button:hover {
   background: #f8fafc;
+}
+
+@media (max-width: 900px) {
+  .goals-page {
+    padding: 1rem;
+  }
+
+  .goals-page-header {
+    justify-content: flex-start;
+  }
+
+  .goals-create-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .goals-create-button {
+    width: 100%;
+  }
+
+  .goal-card-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goal-card-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .goals-summary-card {
+    padding: 1rem;
+  }
+
+  .goal-card {
+    padding: 1rem;
+  }
+
+  .modal-card {
+    padding: 1.25rem;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-button {
+    width: 100%;
+  }
 }
