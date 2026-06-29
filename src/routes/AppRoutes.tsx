@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "../pages/login-page";
+// import LoginPage from "../pages/login-page";
 import SignupPage from "../pages/signup-page";
 import Dashboard from "../pages/dashboard";
 import ExpensePage from "../pages/expense";
@@ -9,7 +9,7 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/expense" element={<ExpensePage />} />
